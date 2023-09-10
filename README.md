@@ -1,37 +1,39 @@
 # Registro de abatidos por día en el Call of Duty
 ![Portada](portadaCOD.png)
 
-Se nos pide modelar un servicio en el famoso videojuego Call of Duty que permita el registro de la cantidad de abatidos por día de un jugador, sin importar la cantidad de partidas jugadas en ese día. 
+Se nos pide modelar un servicio para el famoso videojuego Call of Duty que permita registrar la cantidad de abatidos por día. 
 
-Primero vamos a tener que definir algunos métodos que nos permitan agregar y eliminar elementos al registro de abatidos, y para esta simulación, utilizaremos una lista de enteros que representarán esas cantidades en un lapso de días entre 0 y "n" días, siendo 0 el primer día del que se tiene registro y "n" el último de esos días. 
+Este registro deberá contener las cantidades de abatidos y los días a los que corresponden esas cantidades. Para resolver ese problema, en esta solución deberemos implementar 2 listas en el registro, una que irá a contener las cantidades de abatidos y otra los días a los que corresponden esas cantidades. 
+Cada vez que se agregue un nuevo registro, tendremos que tener en cuenta que se deberá agregar la cantidad de abatidos y a que día pertenece esa cantidad. Para representar cada día, por el momento, usaremos un valor entero del tipo AAAAMMDD. Por ejemplo para representar el 31/12/2022 usaremos 20221231. Más adelante ya veremos que Wollok contempla la posibilidad de usar la clase Date, pero lo dejamos para más adelante. 
 
 Entonces, el registro debe poder manejar los siguientes métodos:
-- `agregarAbatidosDia(cantidad)`: agrega la cantidad de abatidos en un día.
-- `agregarAbatidosVariosDias([cant1,cant2,...])`: agrega la lista de cantidades de abatidos en varios días, ordenada desde el más antiguo.
-- `eliminarlaCantidadDeAbatidos(cantidad)`: elimina la cantidad de abatidos en un día. ¿que pasa si varios días abatió la misma cantidad?.
-- `eliminarLasCantidadesDeAbatidos([cant1,cant2,...])`: elimina las cantidades de abatidos en varios días. Y nos preguntamos ¿que pasa si varios días abatió la misma cantidad?.
+- `agregarAbatidosDia(cantidad, dia)`: agrega la cantidad de abatidos para un día.
+- `agregarAbatidosVariosDias([cant1,cant2,...],[dia1,dia2,...])`: agrega la lista de cantidades de abatidos para varios días, ordenada desde el más antiguo.
+- `eliminarElRegistroDelDia(dia)`: elimina del registro la cantidad de abatidos del día especificado y el día en la lista de dias. 
+- `eliminarLosRegistrosDeDias([dia1,dia2,...])`: elimina las cantidades de abatidos de varios días y los días de la lista de días.
 <br>
 
 El registro debe ser capaz de responder las siguientes consultas:
-- `cantidadDeDiasRegistrados()`: indica la cantidad de días de los que se tiene registro, es decir, el tamaño de la lista.
+- `cantidadDeDiasRegistrados()`: indica la cantidad de días de los que se tiene registro.
 - `estaVacioElRegistro()`: indica si el registro está vacío o no.
-- `algunDiaSeAbatio(cantidad)`: indica si el registro incluye al menos un día en el que se abatió, exactamente, la cantidad indicada.
+- `algunDiaAbatio(cantidad)`: indica si el registro incluye al menos un día en el que se abatió, exactamente, la cantidad indicada.
 - `primerValorDeAbatidos()`: indica la cantidad del primer registro.
 - `ultimoValorDeAbatidos()`: el último valor registrado.  
-- `maximoValorDeAbatidos()`: el valor más alto de abatidos diaria incluido en el registro.
+- `maximoValorDeAbatidos()`: el valor más alto de abatidos incluido en el registro.
 - `totalAbatidos()`: el total de abatidos por el jugador, de acuerdo a la información incluida en el registro.
-- `cantidadDeAbatidosElDiaNro(nroDia)`: la cantidad de abatidos por el jugador el número de día, que es un índice (recordemos que el día 1 es indice 0, día 2 incice 1...).
+- `cantidadDeAbatidosElDia(dia)`: la cantidad de abatidos por el jugador el día indicado.
 - `ultimoValorDeAbatidosConSize()`: Demostrar que last() == size()-1.
-- `abatidosSuperioresA(cuanto)`: los valores de abatidos que superan el valor indicado, en el mismo orden en que aparecen en el registro.
-- `valoresDeAbatidosPares()`: los valores pares incluidos, en el mismo orden en que aparecen en el registro.
+- `diasConAbatidosSuperioresA(cuanto)`: los dias que abatió un valor superior al indicado.
+- `valoresDeAbatidosPares()`: los valores de abatidos del registro que son valores pares.
 - `elValorDeAbatidos(cantidad)`: encuentra y retorna el valor indicado en cantidad.
-- `abatidosSumando(cantidad)`: la serie que resulta de sumar el valor indicado a cada valor de abatidos diaria incluido en el registro. 
-- `abatidosEsAcotada(n1,n2)`: indica si en cada día de que se tiene registro, la cantidad de abatidos se encuentra entre los valores indicados.
+- `abatidosSumando(cantidad)`: la lista de valores que resulta de sumar el valor indicado en 'cantidad' a cada valor de abatidos del registro. 
+- `abatidosEsAcotada(n1,n2)`: indica si en el registro, la cantidad de abatidos se encuentra entre los valores indicados.
 - `algunDiaAbatioMasDe(cantidad)`: indica si algún día de que se tiene registro, la cantidad de abatidos es mayor al valor indicado.
 - `todosLosDiasAbatioMasDe(cantidad)`: indica si todos los días de que se tiene registro, la cantidad de abatidos es mayor al valor indicado.
 - `cantidadAbatidosMayorALaPrimera()`: la cantidad de valores de abatidos diaria que superan a la cantidad indicada para el primer día del registro.
+- `esCrack()`: indica verdadero si en todos los días de los que se tiene registro, el valor de abatidos siempre fue aumentando (mayor valor día a día).
 
-A modo de ejemplo, se indica qué debe responder el registro de abatidos a varios mensajes, si incluye el juego de seis días con valores 43,18,49,62,33,39.
+A modo de ejemplo, se indica qué debe responder el registro de abatidos a varios mensajes, si incluye el juego de seis días con valores 43,18,49,62,33,39 y los días serían 20221231,20230101,20230105,20230106,20230107,20230108.
  
 | mensaje | resultado esperado | 
 | --- | --- |
@@ -48,4 +50,12 @@ A modo de ejemplo, se indica qué debe responder el registro de abatidos a vario
 | `registroAbatidos.cantidadAbatidosMayorALaPrimera()` | `2` (los valores 49 y 62) |
 | `registroAbatidos.algunDiaAbatioMasDe(50)` | `true` |
 | `registroAbatidos.todosLosDiasAbatioMasDe(30)` | `false` |
+| `registroAbatidos.esCrack()` | `false` |
 
+Realizar los test de los otros métodos que no fueron mencionados en este ejemplo, a fin de comprobar que todos funcionan correctamente.
+
+## Puntos desafío
+
+- modificar el método `agregarAbatidosDia(cantidad, dia)` para que contemple la posiblidad de sumar la cantidad indicada en caso que ya exista el día en el registro.
+- hacer el método `ordenarRegistro()` que realiza el ordenamiento de todo el registro de abatidos por fecha. Modificar el método `esCrack()` para que se asegure que está ordenado por fecha antes de evaluar la condición. 
+- agregar todas las validaciones que consideren necesarias para que el modelo sea consistente. 
