@@ -7,7 +7,7 @@ Este registro deberá contener las cantidades de abatidos y los días a los que 
 Cada vez que se agregue un nuevo registro, tendremos que tener en cuenta que se deberá agregar la cantidad de abatidos y a que día pertenece esa cantidad. Para representar cada día, por el momento, usaremos un valor entero del tipo AAAAMMDD. Por ejemplo para representar el 31/12/2022 usaremos 20221231. Más adelante ya veremos que Wollok contempla la posibilidad de usar la clase Date, pero lo dejamos para más adelante. 
 
 Entonces, el registro debe poder manejar los siguientes métodos:
-- `agregarAbatidosDia(cantidad, dia)`: agrega la cantidad de abatidos para un día.
+- `agregarAbatidosDia(cantidad, dia)`: agrega la cantidad de abatidos para un día. Si ya hay registro para el día indicado, arrojar un mensaje de error (usamos self.error("Ya existe registro para el día indicado") y no hacer ningún cambio. 
 - `agregarAbatidosVariosDias([cant1,cant2,...],[dia1,dia2,...])`: agrega la lista de cantidades de abatidos para varios días, ordenada desde el más antiguo.
 - `eliminarElRegistroDelDia(dia)`: elimina del registro la cantidad de abatidos del día especificado y el día en la lista de dias. 
 - `eliminarLosRegistrosDeDias([dia1,dia2,...])`: elimina las cantidades de abatidos de varios días y los días de la lista de días.
